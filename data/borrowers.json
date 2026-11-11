@@ -1,0 +1,62 @@
+[
+  {
+    "id": "BRW-1008",
+    "borrowerId": "BRW-1008",
+    "legalName": "Northwind Packaging LLC",
+    "industry": "Manufacturing",
+    "kycStatus": "current",
+    "officers": [{ "name": "L. Okonkwo", "role": "CEO" }],
+    "relatedParties": [{ "borrowerId": "BRW-1019", "relationship": "common_ownership" }],
+    "facilities": [{ "facilityId": "FAC-44", "type": "revolver", "limit": 2000000, "outstanding": 1250000 }]
+  },
+  {
+    "id": "BRW-1019",
+    "borrowerId": "BRW-1019",
+    "legalName": "Northwind Holdings Inc",
+    "industry": "Manufacturing",
+    "kycStatus": "current",
+    "officers": [],
+    "relatedParties": [{ "borrowerId": "BRW-1008", "relationship": "common_ownership" }],
+    "facilities": []
+  },
+  {
+    "id": "BRW-2044",
+    "borrowerId": "BRW-2044",
+    "legalName": "Lakeshore Foods LLC",
+    "industry": "Food processing",
+    "kycStatus": "current",
+    "officers": [{ "name": "M. Alvarez", "role": "CFO" }],
+    "relatedParties": [],
+    "facilities": [{ "facilityId": "FAC-70", "type": "term", "limit": 5000000, "outstanding": 4200000 }]
+  },
+  {
+    "id": "BRW-3301",
+    "borrowerId": "BRW-3301",
+    "legalName": "Red Pine Logistics Inc",
+    "industry": "Transportation",
+    "kycStatus": "review",
+    "officers": [{ "name": "S. Patel", "role": "CEO" }],
+    "relatedParties": [],
+    "facilities": [{ "facilityId": "FAC-91", "type": "revolver", "limit": 3000000, "outstanding": 2900000 }]
+  },
+  {
+    "id": "BRW-4100",
+    "borrowerId": "BRW-4100",
+    "legalName": "Maple Street Bakery LLC",
+    "industry": "Food processing",
+    "kycStatus": "current",
+    "officers": [{ "name": "A. Chen", "role": "Owner" }],
+    "relatedParties": [],
+    "facilities": [{ "facilityId": "FAC-12", "type": "term", "limit": 500000, "outstanding": 180000 }]
+  },
+  {
+    "id": "BRW-5500",
+    "borrowerId": "BRW-5500",
+    "legalName": "Summit Steel Holdings",
+    "industry": "Manufacturing",
+    "kycStatus": "current",
+    "officers": [{ "name": "R. Okada", "role": "CFO" }],
+    "relatedParties": [{ "borrowerId": "BRW-1008", "relationship": "supplier" }],
+    "facilities": [{ "facilityId": "FAC-88", "type": "revolver", "limit": 15000000, "outstanding": 4000000 }]
+  }
+]

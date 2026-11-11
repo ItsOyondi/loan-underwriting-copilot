@@ -1,0 +1,10 @@
+Its an Azure native multi-agent copilot for loan underwriting use case. 
+Loan case documents needed are: Borrower request, financial statements, Management Report and Credit report.
+Its built around LangGraph as the state orchestrate with Azure openai and 7 agents running document intake, (financial assessment, covenant testing and policy retrieval) running in parallel. 
+Their combined output is handed off to risk synthesis agent, memo preparation agent(drafting the loan report findings) then finally approval routing agent.
+I have exeptionhandler for retries, max-retries and circuit breaker.
+It has three human in the loop(after risk synthesis, after memo preparation and after approval routing for final approval).
+The system has 5 mcp tools (borrower data, financial cals, covenant testing, workflow status and approval record servers). 
+Short term storage is redis and long term storage is pinecone serverless (with two name spaces policy memory and case precedents (previous approved cases).
+Observability is done by langsmith and monitoring by Azure monitor(application insights and log analytics). 
+For the models is Azure Openai. 

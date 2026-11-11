@@ -1,0 +1,124 @@
+{
+  "cases": [
+    {
+      "id": "case_001_strong",
+      "borrower_id": "BRW-1008",
+      "borrower_name": "Northwind Packaging LLC",
+      "requested_amount": 1500000,
+      "purpose": "Clean covenants. Senior Credit Officer band.",
+      "latest_ratios": { "dscr": 2.4, "debt_to_ebitda": 2.5, "current_ratio": 1.6, "interest_coverage": 6.0 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "approve",
+        "risk_grade": 3,
+        "approver_level": "Senior Credit Officer",
+        "current_breach_count": 0,
+        "name_matches": true,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_002_borderline",
+      "borrower_id": "BRW-2044",
+      "borrower_name": "Lakeshore Foods LLC",
+      "requested_amount": 4000000,
+      "purpose": "Current covenants pass. The new loan breaks pro-forma leverage.",
+      "latest_ratios": { "dscr": 1.3043, "debt_to_ebitda": 3.4, "current_ratio": 1.25, "interest_coverage": 3.3333 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "approve_with_conditions",
+        "risk_grade": 6,
+        "approver_level": "Credit Committee",
+        "current_breach_count": 0,
+        "name_matches": true,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_003_breach",
+      "borrower_id": "BRW-3301",
+      "borrower_name": "Red Pine Logistics Inc",
+      "requested_amount": 2000000,
+      "purpose": "All four current covenants fail.",
+      "latest_ratios": { "dscr": 0.9, "debt_to_ebitda": 4.8, "current_ratio": 0.95, "interest_coverage": 1.8 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "decline",
+        "risk_grade": 8,
+        "approver_level": "Credit Committee",
+        "current_breach_count": 4,
+        "name_matches": true,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_004_name_mismatch",
+      "borrower_id": "BRW-1008",
+      "borrower_name": "Northwind Packing LLC",
+      "requested_amount": 1500000,
+      "purpose": "Same numbers as the strong case, but the request name does not match the customer record.",
+      "latest_ratios": { "dscr": 2.4, "debt_to_ebitda": 2.5, "current_ratio": 1.6, "interest_coverage": 6.0 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "approve",
+        "risk_grade": 3,
+        "approver_level": "Senior Credit Officer",
+        "current_breach_count": 0,
+        "name_matches": false,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_005_credit_officer",
+      "borrower_id": "BRW-4100",
+      "borrower_name": "Maple Street Bakery LLC",
+      "requested_amount": 750000,
+      "purpose": "Clean small loan. Credit Officer band at or under $1 million.",
+      "latest_ratios": { "dscr": 2.5, "debt_to_ebitda": 2.0, "current_ratio": 1.5, "interest_coverage": 6.6667 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "approve",
+        "risk_grade": 3,
+        "approver_level": "Credit Officer",
+        "current_breach_count": 0,
+        "name_matches": true,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_006_board",
+      "borrower_id": "BRW-5500",
+      "borrower_name": "Summit Steel Holdings",
+      "requested_amount": 28000000,
+      "purpose": "Clean large loan. Amounts above $25 million route to the Board Credit Committee.",
+      "latest_ratios": { "dscr": 3.0, "debt_to_ebitda": 1.3333, "current_ratio": 1.6667, "interest_coverage": 7.5 },
+      "expect": {
+        "stop_reason": null,
+        "recommendation": "approve",
+        "risk_grade": 3,
+        "approver_level": "Board Credit Committee",
+        "current_breach_count": 0,
+        "name_matches": true,
+        "auto_status": "approved"
+      }
+    },
+    {
+      "id": "case_007_missing_credit",
+      "borrower_id": "BRW-1008",
+      "borrower_name": "Northwind Packaging LLC",
+      "requested_amount": 1500000,
+      "purpose": "The credit report file is absent.",
+      "missing": ["credit_report.md"],
+      "expect": { "stop_reason": "MISSING_DOCUMENTS", "auto_status": "failed" }
+    },
+    {
+      "id": "case_008_unknown_customer",
+      "borrower_id": "BRW-9999",
+      "borrower_name": "Fictional Mills LLC",
+      "requested_amount": 1000000,
+      "purpose": "All four documents are present. The borrower id is not in the customer file.",
+      "latest_ratios": { "dscr": 2.0, "debt_to_ebitda": 2.0, "current_ratio": 1.5, "interest_coverage": 5.0 },
+      "expect": { "stop_reason": "UNKNOWN_CUSTOMER", "auto_status": "failed" }
+    }
+  ]
+}

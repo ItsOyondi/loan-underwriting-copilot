@@ -1,0 +1,18 @@
+loan_type: commercial_term
+covenants:
+  - name: Minimum DSCR
+    metric: dscr
+    operator: ">="
+    threshold: 1.25
+  - name: Maximum Debt/EBITDA
+    metric: debt_to_ebitda
+    operator: "<="
+    threshold: 3.5
+  - name: Minimum current ratio
+    metric: current_ratio
+    operator: ">="
+    threshold: 1.2
+  - name: Minimum interest coverage
+    metric: interest_coverage
+    operator: ">="
+    threshold: 2.0
