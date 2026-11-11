@@ -1,5 +1,6 @@
 .env
 .venv/
+~$*
 data/runtime/*
 !data/runtime/.gitkeep
 __pycache__/
