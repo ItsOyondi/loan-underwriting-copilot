@@ -34,13 +34,9 @@ The other sample cases are listed below. Omit `--auto-approve` to type each of t
 | `case_007_missing_credit` | Credit report file is absent. Case stops | — |
 | `case_008_unknown_customer` | Borrower `BRW-9999` is not in `data/borrowers.json`. Case stops | — |
 
-Customers for the new complete cases are `BRW-4100` Maple Street Bakery LLC and `BRW-5500` Summit Steel Holdings in `data/borrowers.json`. `scripts/seed_cosmos.py` loads that file when Cosmos is turned on.
-
 `--auto-approve` records an approval at every checkpoint, including when the risk agent recommends decline. That lets you see the recorded decision separately from the recommendation.
 
 ## Optional Azure services
-
-Copy `.env.example` to `.env` and fill in only what you have.
 
 - `USE_KEY_VAULT=true` reads `az-openai-endpoint` and `az-openai-apikey` from `clinic-kv-tc-training`, exactly as the existing `rag` project does. Run `az login` first on your workstation. In Azure, the app uses its managed identity. The narrative deployment is `gpt-6.1-terra`; numbers still come from the tools.
 - Direct `AZURE_OPENAI_ENDPOINT` and `AZURE_OPENAI_API_KEY` values override Key Vault when you need a different test resource.
