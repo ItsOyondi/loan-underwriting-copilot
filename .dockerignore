@@ -1,0 +1,12 @@
+.git
+.venv
+**/__pycache__
+.pytest_cache
+.env
+data/runtime
+infra/terraform/.terraform
+**/*.tfstate
+**/*.tfstate.*
+~$*
+*.md
+!data/**/*.md

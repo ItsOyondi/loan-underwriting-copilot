@@ -34,7 +34,7 @@ git push -u origin feature/CP-ReadmeNote
 ## 2. Open a pull request into dev
 
 ```powershell
-gh pr create --base dev --head feature/CP-ReadmeNote --title "Updated readme file" --body "Practice merge into dev."
+gh pr create --base dev --head  feature/7089-update-simulate --title "Updated readme file" --body "Practice merge into dev."
 ```
 
 Open the URL that `gh` prints and merge the pull request on GitHub. The change is now on `dev` only. `main` is unchanged.
