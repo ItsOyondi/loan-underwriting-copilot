@@ -6,3 +6,10 @@ data/runtime/*
 __pycache__/
 .pytest_cache/
 *.pyc
+
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+.gitignore

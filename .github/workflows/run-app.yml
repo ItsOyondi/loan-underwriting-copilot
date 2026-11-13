@@ -1,0 +1,64 @@
+# Runs only after a pull request is merged into dev or main.
+# The workflow file has to be on main before GitHub will start it.
+
+name: Build and run the loan copilot
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - dev
+      - main
+
+jobs:
+  run:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      USE_KEY_VAULT: "false"
+      USE_COSMOS: "false"
+      USE_AZURE_SEARCH: "false"
+      AZURE_OPENAI_ENDPOINT: ""
+      AZURE_OPENAI_API_KEY: ""
+      REDIS_URL: ""
+      LANGSMITH_TRACING: "false"
+      APPLICATIONINSIGHTS_CONNECTION_STRING: ""
+
+    steps:
+      - name: Check out the merge
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+
+      - name: Execute the test suite
+        run: python -m pytest
+
+      - name: Execute a sample case
+        run: python scripts/run_case.py --case case_001_strong --auto-approve
+
+      - name: Build the container
+        run: docker build -t loan-copilot:latest .
+
+      - name: Execute the container
+        run: |
+          docker run -d --name loan-copilot -p 8080:8080 loan-copilot:latest
+          for _ in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/health; then
+              echo
+              curl -fsS -X POST http://localhost:8080/cases \
+                -H "Content-Type: application/json" \
+                -d '{"sample_case":"case_001_strong","auto_approve":true}'
+              echo
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs loan-copilot
+          exit 1
