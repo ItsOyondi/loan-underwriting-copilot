@@ -1,9 +1,12 @@
-# Runs only after a pull request is merged into dev or main.
-# The workflow file has to be on main before GitHub will start it.
+# Runs after a push to any branch, and after a pull request is merged into dev or main.
+# GitHub uses the workflow file in the commit that was pushed.
 
 name: Build and run the loan copilot
 
 on:
+  push:
+    branches:
+      - "**"
   pull_request:
     types: [closed]
     branches:
@@ -12,7 +15,7 @@ on:
 
 jobs:
   run:
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'push' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       USE_KEY_VAULT: "false"
@@ -25,7 +28,7 @@ jobs:
       APPLICATIONINSIGHTS_CONNECTION_STRING: ""
 
     steps:
-      - name: Check out the merge
+      - name: Check out the repository
         uses: actions/checkout@v4
 
       - name: Set up Python

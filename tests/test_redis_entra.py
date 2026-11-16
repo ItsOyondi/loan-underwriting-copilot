@@ -13,14 +13,20 @@ from loan_copilot.memory.redis_store import _endpoint, ping_redis
 
 
 def _configured_redis_url() -> str:
-    for line in Path(ROOT, ".env").read_text(encoding="utf-8").splitlines():
+    env_file = Path(ROOT, ".env")
+    if not env_file.is_file():
+        return ""
+    for line in env_file.read_text(encoding="utf-8").splitlines():
         if line.startswith("REDIS_URL="):
             return line.split("=", 1)[1].strip()
     return ""
 
 
 def test_azure_redis_url_uses_entra_id():
-    host, port, use_entra = _endpoint(_configured_redis_url())
+    url = _configured_redis_url()
+    if not url:
+        pytest.skip(".env is not in this checkout, so the Redis host cannot be checked.")
+    host, port, use_entra = _endpoint(url)
     assert host == "redis-db-rs.eastus.redis.azure.net"
     assert port == 10000
     assert use_entra is True
