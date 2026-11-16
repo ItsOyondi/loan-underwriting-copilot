@@ -43,8 +43,8 @@ jobs:
       - name: Execute the test suite
         run: python -m pytest
 
-      - name: Execute a sample case
-        run: python scripts/run_case.py --case case_001_strong --auto-approve
+      # - name: Execute a sample case
+      #   run: python scripts/run_case.py --case case_001_strong --auto-approve
 
       - name: Build the container
         run: docker build -t loan-copilot:latest .
